@@ -1,4 +1,4 @@
 
-## Laravel
+<center>## Laravel</center>
 
-<strong>Material de Estudo</strong>
+<center><strong>Material de Estudo</strong></center>
