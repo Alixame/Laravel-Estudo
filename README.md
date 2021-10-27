@@ -2,7 +2,7 @@
 
 <p align="center">Material de Estudo</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p>O Framework Laravel da linguagem PHP é atualmente um dos mais usados, tendo essa ideia em mente vamos aqui você conhecerá e aprenderá a usar essa tecnologia.</p>
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
 - [Powerful dependency injection container](https://laravel.com/docs/container).
