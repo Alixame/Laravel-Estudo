@@ -1,4 +1,4 @@
 
 ## Laravel
 
-<center>Material de Estudo
+<center>Material de Estudo</center>
