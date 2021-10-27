@@ -2,7 +2,7 @@
 
 <p align="center">Material de Estudo</p>
 
-<p align="justify">O Framework [Laravel](https://laravel.com/) da linguagem PHP é atualmente um dos mais usados, tendo essa ideia em mente vamos aqui você conhecerá e aprenderá a usar essa tecnologia.</p>
+<p align="justify">O Framework **Laravel (https://laravel.com/)** da linguagem PHP é atualmente um dos mais usados, tendo essa ideia em mente vamos aqui você conhecerá e aprenderá a usar essa tecnologia.</p>
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
 - [Powerful dependency injection container](https://laravel.com/docs/container).
