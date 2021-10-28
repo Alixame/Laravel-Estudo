@@ -59,9 +59,7 @@ Route::prefix("/admin")->group( function(){
         return "PRODUTOS";
     })->name("admin.produtos");
 
-    Route::get('/fornecedores', function () {
-        return "FORNECEDORES";
-    })->name("admin.fornecedores");
+    Route::get('/fornecedores', 'FornecedorController@index')->name("admin.fornecedores");
     
     Route::get('/clientes', function () {
         return "CLIENTES";
