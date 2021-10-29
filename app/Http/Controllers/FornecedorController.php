@@ -12,15 +12,19 @@ class FornecedorController extends Controller{
         $fornecedores = [
             
             0 => [
-                "nome"   => "Lucas Alixame",
-                "cnpj"   => "000.000.000-00",
-                "status" => "N"
+                "nome"     => "Lucas Alixame",
+                "cnpj"     => "000.000.000-00",
+                "status"   => "N",
+                "ddd"      => "17", // Rio Preto (SP)
+                "telefone" => "99216-2676"
             ],
             
             1 => [
-                "nome"   => "Andre Teste",
-                "cnpj"   => "",
-                "status" => "N"
+                "nome"     => "Andre Teste",
+                "cnpj"     => "",
+                "status"   => "N",
+                "ddd"      => "85", // Fortaleza (CE)
+                "telefone" => "00000-0000"
             ]
 
         ];

@@ -13,34 +13,32 @@
 
 @isset($fornecedores)
 
-    Nome: {{$fornecedores[0]["nome"]}}
-    
-    @isset($fornecedores[0]["cnpj"])
+    @forelse ( $fornecedores as $indices => $fornecedor)
+
+        Nome: {{ $fornecedor["nome"] }}
+        <br>
+        CNPJ: {{ $fornecedor["cnpj"] ?? "- Vazio" }}
+        <br>
+        Telefone: {{ $fornecedor["ddd"] ?? "" }} {{ $fornecedor["telefone"] ?? "" }}
         
-        <br>CNPJ: {{$fornecedores[0]["cnpj"]}}
-        @empty($fornecedores[0]["cnpj"])
-            - Vazio
-        @endempty
+        @switch($fornecedor["ddd"])
+            @case("17")
+                (São José do Rio Preto - SP)
+                @break
+            @case("85")
+                (Fortaleza - CE)
+                @break
+        @endswitch
 
-    @endisset
-
-    <br>Status: {{$fornecedores[0]["status"]}}
-   
-    <hr>
-    
-    Nome: {{$fornecedores[1]["nome"]}}
-    
-    @isset($fornecedores[1]["cnpj"])
+        <br>       
+        Status: {{ $fornecedor["status"] }}  
         
-        <br>CNPJ: {{$fornecedores[1]["cnpj"]}}
-        @empty($fornecedores[1]["cnpj"])
-            - Vazio
-        @endempty
+        <hr>
+        
+        @empty
+        Não tem fornecedores cadastrados.
 
-    @endisset
-    
-    <br>Status: {{$fornecedores[1]["status"]}}
-
+    @endforelse
 
 @endisset
 
