@@ -6,7 +6,7 @@ O Framework [Laravel](https://laravel.com/) da linguagem PHP é atualmente um do
 
 <br>
 
-<h3>Conhecendo o Artisan<h3>
+-   <h3>Conhecendo o Artisan</h3>
 
 O Framework [Laravel](https://laravel.com/) possui uma poderosa ferramenta conhecida como Artisan, atraves dela que você conseguirá contruir toda a estrutura de seu sistema e testa-lo.
 
