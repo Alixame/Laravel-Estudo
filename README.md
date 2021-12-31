@@ -4,7 +4,7 @@
 
 O Framework [Laravel](https://laravel.com/) da linguagem PHP é atualmente um dos mais usados, tendo essa ideia em mente vamos aqui você conhecerá e aprenderá a usar essa tecnologia.
 
-<br>
+<hr>
 
 -   <h3>Conhecendo o Artisan</h3>
 
