@@ -13,3 +13,27 @@ O Artisan é usado via terminal, abrindo o terminal basta utilizar o comando _ph
 _Comando sitado:_
 
       php artisan
+
+Ao usar o comando mostrará varios comandos do proprio artisan separando em topicos:
+
+_1º Usage_ - Demonstra a forma correta de se utilizar os comandos via terminal.
+
+_2º Options_ - Demonstra comandos de configurações como: ajuda, versão, etc...
+
+_3º Available commands_ - Demonstra comandos primarios das ferramentas presente no [Laravel](https://laravel.com/).
+
+_4º Auth_ - Demonstra comandos de autenticação.
+
+_5º Cache_ - Demonstra comandos para manipular o cache.
+
+_6º Config_ - Demonstra comandos de configurações.
+
+_7º Db_ - Demonstra comandos de manipulação da base de dados.
+
+_8º Event_ - Demonstra comandos de manipulação de eventos.
+
+_9º Key_ - Demonstra comandos que gera chaves de acesso.
+
+_10º Make_ - Demonstra comandos de criação de classes.
+
+_11º Migrate_ - Demonstra comandos de migrações (Controle de Banco de Dados).
