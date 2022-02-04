@@ -10,10 +10,21 @@ class ContatoController extends Controller{
     /**
      *  METODO RESPONSAVEL POR RENDERIZAR A PAGINA 'ENTRE EM CONTATO'
      *
-     * @param Request $formData - VARIAVEL QUE RECEBE OS DADOS DO FORMULARIO
      * @return view
      */
-    public function contato(Request $formData){
+    public function contato(){
+
+        return view('site.contato', ['titulo' => 'Super Gestão | Site Contato']);
+
+    }
+
+    /**
+     * METODO RESPONSAVEL POR SALVAR OS DADOS DO FORMULARIO NO BANCO
+     *
+     * @param Request $formData - VARIAVEL QUE RECEBE OS DADOS DO FORMULARIO
+     * @return void
+     */
+    public function salvar(Request $formData){
 
         // 1º METODO DE SALVAR O DADO DO FORMULARIO NO BANCO (METODO UTILIZADO PARA TRATAMENTO DE INFORMAÇÃO)
         /*
@@ -27,9 +38,11 @@ class ContatoController extends Controller{
         */
 
         // 2º METODO DE SALVAR O DADO DO FORMULARIO NO BANCO (METODO PRATICO)
+        /*
         $contato = new SiteContato();
         $contato->fill($formData->all());
         $contato->save();
+        */
 
         // 3º METODO DE SALVAR O DADO DO FORMULARIO NO BANCO (METODO RAPIDO)
         /*
@@ -37,7 +50,15 @@ class ContatoController extends Controller{
         $contato->create($formData->all());
         */
 
-        return view('site.contato', ['titulo' => 'Super Gestão | Site Contato']);
+        $formData->validate([
+            'nome' => 'required|max:50',
+            'telefone' => 'required',
+            'email' => 'required|email:rfc,dns',
+            'motivo_contato' => 'required',
+            'mensagem' => 'required|max:250',
+        ]);
 
     }
+
+
 }
