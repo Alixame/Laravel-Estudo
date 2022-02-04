@@ -50,12 +50,13 @@ class ContatoController extends Controller{
         $contato->create($formData->all());
         */
 
+        // VALIDANDO CAMPOS DO FORMULARIO RECEBIDOS VIA POST
         $formData->validate([
-            'nome' => 'required|max:50',
-            'telefone' => 'required',
-            'email' => 'required|email:rfc,dns',
-            'motivo_contato' => 'required',
-            'mensagem' => 'required|max:250',
+            'nome' => 'required|max:50', // VALIDANDO QUE O CAMPO NOME NÃO PODE SER NULO NEM CONTER MAIS DE 50 CARACTERS
+            'telefone' => 'required', // VALIDANDO QUJE O CAMPO TELEFONE NÃO PODE SER NULO
+            'email' => 'required|email:rfc,dns', // VALIDANDO QUE O CAMPO DE EMAIL NÃO PODE SER NULO E DEVE SER UM EMAIL VALIDO
+            'motivo_contato' => 'required', // VALIDANDO QUE O CAMPO MOTIVO CONTATO NÃO PODE SER NULO
+            'mensagem' => 'required|max:250', // VALIDANDO QUE O CAMPO MENSAGEM NÃO PODE SER NULO NEM CONTER MAIS DE 250 CARACTERS
         ]);
 
     }
