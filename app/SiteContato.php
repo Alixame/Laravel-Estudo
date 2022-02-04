@@ -10,5 +10,5 @@ class SiteContato extends Model
     protected $table = "site_contatos";
 
     // Definindo campos da tabela que podem ser recuperados e alterados
-    protected $fillable = [ 'nome', 'telefone', 'email', 'motivo_contato_id', 'mensagem'];
+    protected $fillable = [ 'nome', 'telefone', 'email', 'motivo_contato', 'mensagem'];
 }
