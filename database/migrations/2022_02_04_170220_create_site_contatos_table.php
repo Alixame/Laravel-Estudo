@@ -18,9 +18,12 @@ class CreateSiteContatosTable extends Migration
             $table->string("nome", 50);
             $table->string("telefone", 20);
             $table->string("email", 80);
-            $table->integer("motivo_contato");
+            $table->unsignedBigInteger("motivo_contato_id");
             $table->text("mensagem");
             $table->timestamps();
+
+            //FOREIGN KEY
+            $table->foreign('motivo_contato_id')->references('id')->on('motivo_contatos');
         });
     }
 

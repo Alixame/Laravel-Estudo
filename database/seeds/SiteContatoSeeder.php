@@ -17,11 +17,11 @@ class SiteContatoSeeder extends Seeder
         $contato->nome = 'Lucas Alixame';
         $contato->telefone = '17 992162676';
         $contato->email = 'lucasali2003@gmail.com';
-        $contato->motivo_contato = 1;
+        $contato->motivo_contato_id = 1;
         $contato->mensagem = 'Seja bem-vindo ao sistema';
         $contato->save();*/
-
         factory(SiteContato::class, 100)->create();
+        
 
     }
 }
