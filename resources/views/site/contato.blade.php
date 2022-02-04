@@ -8,10 +8,9 @@
         <div class="titulo-pagina">
             <h1>Entre em contato conosco</h1>
         </div>
-
         <div class="informacao-pagina">
             <div class="contato-principal">
-                @component('site.app._components.form_contato', ["class" => "borda-preta"])
+                @component('site.app._components.form_contato', ["class" => "borda-preta" , 'motivo_contatos' => $motivo_contatos])
                     <p>Nossa equipe ira analisar sua mensagem e responde-la o mais rapido possivel</p>
                     <p>Nosso tempo medio de resposta é de 48h</p>
                 @endcomponent

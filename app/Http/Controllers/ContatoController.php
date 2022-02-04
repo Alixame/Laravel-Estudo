@@ -13,8 +13,14 @@ class ContatoController extends Controller{
      * @return view
      */
     public function contato(){
+        
+        $motivo_contatos = [
+            '1' => 'Dúvida',
+            '2' => 'Elogio',
+            '3' => 'Reclamação'
+        ];
 
-        return view('site.contato', ['titulo' => 'Super Gestão | Site Contato']);
+        return view('site.contato', ['titulo' => 'Super Gestão | Site Contato' , 'motivo_contatos' => $motivo_contatos]);
 
     }
 
