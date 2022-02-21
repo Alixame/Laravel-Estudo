@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+// QUANDO FOR UTILIZAR UM MIDDLEWARE NÃO SE ESQUEÇA DE DAR UM USE NA CLASSE
+use App\Http\Middleware\LogAcessoMiddleware;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,7 +40,10 @@ Route::get('/contato', function () {
 //IDENTIFICADOR DE ROTA = "/"(POR EXEMPLO) E O CONTROLADOR QUE DESEJE USAR,EM SEGUIDA BASTA PASSAR POR @ A FUNÇÃO DO CONTROLADOR A SER CHAMADA. 
 //PODEMOS USAR A FUNÇÃO -NAME- DA CLASSE -ROUTER- PARA APELIDAR ESTÁ ROTA, SENDO POSSIVEL CHAMAR ELA ATRAVES DO APELIDO E NÃO MAIS PELO SEU IDENTIFICADOR (ISSO FACILITARÁ NA CONTRUÇÃO DE SEU SITE)
 
-Route::get('/','PrincipalController@principal')->name("site.index");
+
+// PARA ADICIONAR UM MIDDLEWARE A ROTA BASTA CHAMAR ->middleware() NO FINAL DA ROTA, PASSANDO A CLASSE DO MIDDLEWARE
+Route::middleware(LogAcessoMiddleware::class)
+        -> get('/','PrincipalController@principal')->name("site.index");
 
 Route::get('/sobre-nos','SobreNosController@sobreNos')->name("site.sobre-nos");
 
