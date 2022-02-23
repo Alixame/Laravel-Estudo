@@ -41,9 +41,9 @@ Route::get('/contato', function () {
 //PODEMOS USAR A FUNÇÃO -NAME- DA CLASSE -ROUTER- PARA APELIDAR ESTÁ ROTA, SENDO POSSIVEL CHAMAR ELA ATRAVES DO APELIDO E NÃO MAIS PELO SEU IDENTIFICADOR (ISSO FACILITARÁ NA CONTRUÇÃO DE SEU SITE)
 
 
-// PARA ADICIONAR UM MIDDLEWARE A ROTA BASTA CHAMAR ->middleware() NO FINAL DA ROTA, PASSANDO A CLASSE DO MIDDLEWARE
-Route::middleware(LogAcessoMiddleware::class)
-        -> get('/','PrincipalController@principal')->name("site.index");
+// PARA ADICIONAR UM MIDDLEWARE A ROTA BASTA CHAMAR middleware(), PASSANDO A CLASSE DO MIDDLEWARE OU O SEU APELIDO
+Route::middleware('log.acesso')
+->get('/','PrincipalController@principal')->name("site.index");
 
 Route::get('/sobre-nos','SobreNosController@sobreNos')->name("site.sobre-nos");
 

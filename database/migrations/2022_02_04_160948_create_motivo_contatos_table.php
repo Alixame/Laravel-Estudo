@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateMotivoContatosTable extends Migration
 {
@@ -18,6 +19,8 @@ class CreateMotivoContatosTable extends Migration
             $table->string('motivo_contato', 20);
             $table->timestamps();
         });
+
+        DB::select("INSERT INTO `motivo_contatos` (motivo_contato, created_at, updated_at) VALUES ('Orçamento', NOW(),NOW()), ('Duvida',NOW(),NOW()), ('Elogio',NOW(),NOW()), ('Reclamação',NOW(),NOW());");
 
     }
 
