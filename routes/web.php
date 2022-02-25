@@ -52,15 +52,14 @@ Route::post('/contato','ContatoController@salvar')->name("site.contato");
 
 
 
-Route::get('/login', function () {
-    return "LOGIN";
-})->name("site.login");
+Route::get('/login','LoginController@index')->name("site.login");
+Route::post('/login','LoginController@autenticar')->name("site.login");
 
-Route::get('/admin', function () {
+Route::middleware('autenticacao')->get('/admin', function () {
     return "PAINEL";
 })->name("admin.panel");
 
-Route::prefix("/admin")->group( function(){
+Route::middleware('autenticacao')->prefix("/admin")->group( function(){
 
     Route::get('/produtos', function (){
         return "PRODUTOS";
