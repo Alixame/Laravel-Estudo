@@ -15,11 +15,16 @@ class AutenticacaoMiddleware
      */
     public function handle($request, Closure $next)
     {
+        session_start();
 
-        if (true) {
+        // VERIFICANDO SE EXISTE A VARIAVEL EMAIL DENTRO DA SESSÃO
+        if(isset($_SESSION['email']) && $_SESSION != ''){
+            // SE SIM: CONTINUA PARA A PAGINA
             return $next($request);
         } else {
-            return response('Acesso negado! Rota exige autenticação!');
+            // SE NÃO: REDIRECIONA PARA A TELA DE LOGIN NEGANDO ACESSO -> RETORNANDO MENSAGEM DE ERRO
+            return redirect()->route('site.login')->withErrors(["invalido"=>"É Necessario fazer login para ter acesso!"]);
         }
+        
     }
 }
