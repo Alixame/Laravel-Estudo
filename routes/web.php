@@ -53,21 +53,19 @@ Route::post('/contato','ContatoController@salvar')->name("site.contato");
 Route::get('/login','LoginController@index')->name("site.login");
 Route::post('/login','LoginController@autenticar')->name("site.login");
 
-Route::middleware('autenticacao')->get('/admin', function () {
-    return "PAINEL";
-})->name("admin.panel");
+
 
 Route::middleware('autenticacao')->prefix("/admin")->group( function(){
 
-    Route::get('/produtos', function (){
-        return "PRODUTOS";
-    })->name("admin.produtos");
+    Route::get('', 'PainelController@index')->name("admin.panel");
 
-    Route::get('/fornecedores', 'FornecedorController@index')->name("admin.fornecedores");
-    
-    Route::get('/clientes', function () {
-        return "CLIENTES";
-    })->name("admin.clientes");
+    Route::get('/sair', 'LoginController@sair')->name("admin.sair");
+        
+    Route::get('/cliente', 'ClienteController@index')->name("admin.cliente");
+
+    Route::get('/produto', 'ProdutoController@index')->name("admin.produto");
+
+    Route::get('/fornecedore', 'FornecedorController@index')->name("admin.fornecedores");
 
 });
 
