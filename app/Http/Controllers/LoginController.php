@@ -50,7 +50,7 @@ class LoginController extends Controller
             $_SESSION['name'] = $user->name;
             $_SESSION['email'] = $user->email;
 
-            return redirect()->route('admin.panel');
+            return redirect()->route('admin.painel');
 
         } else {
 
@@ -62,6 +62,11 @@ class LoginController extends Controller
     }
 
     public function sair(){
-        
+
+        session_destroy();
+
+        return redirect()->route('site.index');
+
     }
+
 }

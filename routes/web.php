@@ -57,7 +57,7 @@ Route::post('/login','LoginController@autenticar')->name("site.login");
 
 Route::middleware('autenticacao')->prefix("/admin")->group( function(){
 
-    Route::get('', 'PainelController@index')->name("admin.panel");
+    Route::get('', 'PainelController@index')->name("admin.painel");
 
     Route::get('/sair', 'LoginController@sair')->name("admin.sair");
         
@@ -65,7 +65,12 @@ Route::middleware('autenticacao')->prefix("/admin")->group( function(){
 
     Route::get('/produto', 'ProdutoController@index')->name("admin.produto");
 
-    Route::get('/fornecedore', 'FornecedorController@index')->name("admin.fornecedores");
+    Route::prefix('/fornecedor')->group(function () {
+        Route::get('', 'FornecedorController@index')->name("admin.fornecedor");
+        Route::post('/listar', 'FornecedorController@listar')->name("admin.fornecedor.listar");
+        Route::get('/adicionar', 'FornecedorController@adicionar')->name("admin.fornecedor.adicionar");
+    });
+
 
 });
 

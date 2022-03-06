@@ -8,6 +8,6 @@ class PainelController extends Controller
 {
     //
     public function index(){
-        
+        return view('site.admin.painel');
     }
 }
