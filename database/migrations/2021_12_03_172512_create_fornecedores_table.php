@@ -20,6 +20,7 @@ class CreateFornecedoresTable extends Migration
             $table->string('uf',2);
             $table->string('email',150);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

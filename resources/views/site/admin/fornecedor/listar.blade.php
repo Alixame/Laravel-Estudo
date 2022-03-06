@@ -47,6 +47,10 @@
                 </tbody>
             </table>
             
+            {{ $fornecedores->appends($request)->links() }}
+            <br>
+            Exibindo {{ $fornecedores->count() }} registros de {{ $fornecedores->total() }} (De {{ $fornecedores->firstItem() }} a {{ $fornecedores->lastItem() }})  
+
         </div>
     </div>
 
