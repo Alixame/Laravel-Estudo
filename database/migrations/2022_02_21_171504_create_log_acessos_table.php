@@ -17,7 +17,7 @@ class CreateLogAcessosTable extends Migration
             $table->id();
             $table->string('ip',50);
             $table->string('metodo', 10);
-            $table->string('rota', 50);
+            $table->string('rota', 200);
             $table->timestamps();
         });
     }

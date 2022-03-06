@@ -69,6 +69,9 @@ Route::middleware('autenticacao')->prefix("/admin")->group( function(){
         Route::get('', 'FornecedorController@index')->name("admin.fornecedor");
         Route::post('/listar', 'FornecedorController@listar')->name("admin.fornecedor.listar");
         Route::get('/adicionar', 'FornecedorController@adicionar')->name("admin.fornecedor.adicionar");
+        Route::post('/adicionar', 'FornecedorController@adicionar')->name("admin.fornecedor.adicionar");
+        Route::get('/editar/{id}/{msg?}', 'FornecedorController@editar')->name("admin.fornecedor.editar");
+        Route::get('/excluir/{id}', 'FornecedorController@excluir')->name("admin.fornecedor.excluir");
     });
 
 

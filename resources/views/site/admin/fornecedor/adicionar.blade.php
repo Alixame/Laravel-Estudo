@@ -19,16 +19,25 @@
 
     <div class="informacao-pagina">
         <div style="width: 30%; margin-left: auto; margin-right: auto;">
-            <form action="" method="post">
+
+            {{$msg ?? ''}}
+
+            <form action="{{route('admin.fornecedor.adicionar')}}" method="post">
                 @csrf
 
-                <input type="text" name="nome" class="borda-preta" placeholder="Nome">
+                <input type="hidden" name="id" value="{{ $fornecedor->id ?? '' }}">
 
-                <input type="text" name="site" class="borda-preta" placeholder="Site">
+                {{$errors->has('nome')? $errors->first('nome') : ''}}
+                <input type="text" name="nome" class="borda-preta" placeholder="Nome" value="{{ $fornecedor->nome ?? old('nome') }}">
 
-                <input type="text" name="uf" class="borda-preta" placeholder="UF">
+                {{$errors->has('site')? $errors->first('site') : ''}}
+                <input type="text" name="site" class="borda-preta" placeholder="Site" value="{{ $fornecedor->site ?? old('site')}}">
 
-                <input type="text" name="email" class="borda-preta" placeholder="Email">
+                {{$errors->has('uf')? $errors->first('uf') : ''}}
+                <input type="text" name="uf" class="borda-preta" placeholder="UF" value="{{ $fornecedor->uf ?? old('uf')}}">
+
+                {{$errors->has('email')? $errors->first('email') : ''}}
+                <input type="text" name="email" class="borda-preta" placeholder="Email" value="{{ $fornecedor->email ?? old('email')}}">
 
                 <button type="submit" class="borda-preta">Adicionar</button>
 
