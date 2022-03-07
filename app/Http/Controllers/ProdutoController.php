@@ -64,7 +64,7 @@ class ProdutoController extends Controller {
          * 
          * PASSANDO A VARIAVEL $unidades PARA A VIEW
          */
-        // return view('site.admin.produto.create', ['unidades' => $unidades]);
+        return view('site.admin.produto.create', ['unidades' => $unidades]);
         
         /**
          *  RETORNANDO VIEW (CREATE-EDIT)
@@ -73,7 +73,7 @@ class ProdutoController extends Controller {
          * 
          * PASSANDO A VARIAVEL $unidades PARA A VIEW
          */
-        return view('site.admin.produto.create-edit', ['unidades' => $unidades]);
+        // return view('site.admin.produto.create-edit', ['unidades' => $unidades]);
 
     }
 
@@ -129,7 +129,7 @@ class ProdutoController extends Controller {
          * 
          * PASSANDO AS VARIAVEIS $produto E $unidades PARA A VIEW
          */
-        // return view('site.admin.produto.edit', ['produto' => $produto,  'unidades' => $unidades]);
+        return view('site.admin.produto.edit', ['produto' => $produto,  'unidades' => $unidades]);
 
         /**
          *  RETORNANDO VIEW (CREATE-EDIT)
@@ -138,7 +138,7 @@ class ProdutoController extends Controller {
          * 
          * PASSANDO A VARIAVEL $unidades PARA A VIEW
          */
-        return view('site.admin.produto.create-edit', ['produto' => $produto, 'unidades' => $unidades]);
+        //return view('site.admin.produto.create-edit', ['produto' => $produto, 'unidades' => $unidades]);
     
     }
 
