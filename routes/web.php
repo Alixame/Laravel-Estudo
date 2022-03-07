@@ -63,8 +63,6 @@ Route::middleware('autenticacao')->prefix("/admin")->group( function(){
         
     Route::get('/cliente', 'ClienteController@index')->name("admin.cliente");
 
-    Route::resource('produto', 'ProdutoController');
-
     Route::prefix('/fornecedor')->group(function () {
         Route::get('', 'FornecedorController@index')->name("admin.fornecedor");
         Route::get('/listar', 'FornecedorController@listar')->name("admin.fornecedor.listar");
@@ -75,6 +73,11 @@ Route::middleware('autenticacao')->prefix("/admin")->group( function(){
         Route::get('/excluir/{id}', 'FornecedorController@excluir')->name("admin.fornecedor.excluir");
     });
 
+    // PRODUTO
+    Route::resource('produto', 'ProdutoController');
+
+    // PRODUTO DETALHE
+    Route::resource('produto-detalhe', 'ProdutoDetalheController');
 
 });
 
