@@ -63,7 +63,7 @@ Route::middleware('autenticacao')->prefix("/admin")->group( function(){
         
     Route::get('/cliente', 'ClienteController@index')->name("admin.cliente");
 
-    Route::get('/produto', 'ProdutoController@index')->name("admin.produto");
+    Route::resource('produto', 'ProdutoController');
 
     Route::prefix('/fornecedor')->group(function () {
         Route::get('', 'FornecedorController@index')->name("admin.fornecedor");
