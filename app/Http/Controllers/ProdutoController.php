@@ -6,114 +6,163 @@ use App\Produto;
 use App\Unidade;
 use Illuminate\Http\Request;
 
-class ProdutoController extends Controller
-{
+class ProdutoController extends Controller {
+
+    // DEFININDO REGRAS DE VALIDAÇÃO PARA O FORMULARIO DE CRIAÇÃO
+    protected $regras = [
+        'nome' => 'required|min:3|max:40',
+        'descricao' => 'required|min:3|max:2000',
+        'peso' => 'required|integer',
+        'unidade_id' => 'exists:unidades,id', // esse tipo de validação verifica se o dado informado existe na coluna da tabela informada exists:<tabela>,<coluna>
+    ];
+
+    // DEFININDO MENSAGENS PERSONALIZADAS CASO OCORRA ERRO NA VALIDAÇÃO
+    protected $feedbacks = [
+        'required' => 'O campo :attribute deve ser preenchido',
+        'nome.min' => 'O campo nome deve conter no minimo 3 caracteres',
+        'nome.max' => 'O campo nome deve conter no maximo 40 caracteres',
+        'descricao.min' => 'O campo descricao deve conter no minimo 3 caracteres',
+        'descricao.min' => 'O campo descricao deve conter no maximo 2000 caracteres',
+        'peso.integer' => 'O campo peso deve ser do tipo inteiro',
+        'unidade_id.exists' => 'O campo unidade de medida informado não existe'
+    ];
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * MÉTODO RESPONSAVEL POR RENDERIZAR A TELA DA TABELA DOS REGISTROS.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response ( VIEW )
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request){
+
+        // PEGANDO DADOS DO BANCO UTILIZANDO PAGINAÇÃO (SEMELHANTE AO METODO ALL MAS NESTE EXISTE NAVEEGAÇÃO ENTRE PAGINAS JÁ PRONTA)
         $produtos = Produto::paginate(10);
 
+        /**
+         *  RETORNANDO VIEW (INDEX)
+         * 
+         * PASSANDO AS VARIAVEIS $produtos e $request PARA A VIEW
+         */
         return view('site.admin.produto.index', ['produtos' => $produtos, 'request' => $request->all()]);
+
+        // OBS: A variavel $request é necessaria para que a paginação não quebre
 
     }
 
     /**
-     * Show the form for creating a new resource.
+     * MÉTODO RESPONSAVEL POR RENDERIZAR O FORMULARIO DE CRIAÇÃO DE UM REGISTRO
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response ( VIEW )
      */
-    public function create()
-    {
+    public function create(){
+
+        // PEGANDO TODOS OS REGISTROS DE UNIDADES PARA SEREM USADOS NO SELECT DO FORMULARIO
         $unidades = Unidade::all();
 
+        /**
+         *  RETORNANDO VIEW (CREATE)
+         * 
+         * PASSANDO A VARIAVEL $unidades PARA A VIEW
+         */
         return view('site.admin.produto.create', ['unidades' => $unidades]);
 
     }
 
     /**
-     * Store a newly created resource in storage.
+     * MÉTODO RESPONSAVEL POR PEGAR OS DADOS DO FORMULARIO, VALIDAR E SALVAR NO BD
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response ( REDIRECT )
      */
-    public function store(Request $request)
-    {
-        $regras = [
-            'nome' => 'required|min:3|max:40',
-            'descricao' => 'required|min:3|max:2000',
-            'peso' => 'required|integer',
-            'unidade_id' => 'exists:unidades,id', // esse tipo de validação verifica se o dado informado existe na coluna da tabela informada exists:<tabela>,<coluna>
-        ];
+    public function store(Request $request){
 
-        $feedbacks = [
-            'required' => 'O campo :attribute deve ser preenchido',
-            'nome.min' => 'O campo nome deve conter no minimo 3 caracteres',
-            'nome.max' => 'O campo nome deve conter no maximo 40 caracteres',
-            'descricao.min' => 'O campo descricao deve conter no minimo 3 caracteres',
-            'descricao.min' => 'O campo descricao deve conter no maximo 2000 caracteres',
-            'peso.integer' => 'O campo peso deve ser do tipo inteiro',
-            'unidade_id.exists' => 'O campo unidade de medida informado não existe'
-        ];
+        // VALIDANDO CAMPOS DO FORMULARIO
+        $request->validate($this->regras, $this->feedbacks);
 
-        $request->validate($regras, $feedbacks);
-
+        // APÓS VALIDAR OS DADOS, AS INFORMAÇÕES DO FORMULARIO É SALVA NO BD
         Produto::create($request->all());
 
+        // REDIRECIONANDO PARA A VIEW (INDEX)
         return redirect()->route('produto.index');
+
     }
 
     /**
-     * Display the specified resource.
+     * MÉTODO RESPONSAVEL POR RENDERIZAR DADOS ESPECIFICOS DE UM UNICO REGISTRO
      *
      * @param  \App\Produto  $produto
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response ( VIEW )
      */
-    public function show(Produto $produto)
-    {
+    public function show(Produto $produto){
+
+        /**
+         *  RETORNANDO VIEW (SHOW)
+         * 
+         * PASSANDO A VARIAVEL $produto PARA A VIEW
+         */
         return view('site.admin.produto.show', ['produto' => $produto]);
+    
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * MÉTODO RESPONSAVEL POR RENDERIZAR O FORMULARIO DE EDIÇÃO COM OS DADOS DO REGISTRO
      *
      * @param  \App\Produto  $produto
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response ( VIEW )
      */
-    public function edit(Produto $produto)
-    {
+    public function edit(Produto $produto){
+        
+        // PEGANDO TODOS OS REGISTROS DE UNIDADES PARA SEREM USADOS NO SELECT DO FORMULARIO 
         $unidades = Unidade::all();
 
+         /**
+         *  RETORNANDO VIEW (EDIT)
+         * 
+         * PASSANDO AS VARIAVEIS $produto E $unidades PARA A VIEW
+         */
         return view('site.admin.produto.edit', ['produto' => $produto,  'unidades' => $unidades]);
+    
     }
 
     /**
-     * Update the specified resource in storage.
+     * MÉTODO RESPONSAVEL POR PEGAR OS DADOS DO FORMULARIO DE EDIÇÃO E SALVAR NO BD
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Produto  $produto
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response ( REDIRECT )
      */
-    public function update(Request $request, Produto $produto)
-    {
+    public function update(Request $request, Produto $produto){
+
+        // VALIDANDO CAMPOS DO FORMULARIO
+        $request->validate($this->regras, $this->feedbacks);
+
+        // ATUALIZANDO DADOS DO REGISTRO
         $produto->update($request->all());
 
+        /**
+         *  REDIRECIONANDO PARA ROTA (SHOW)
+         * 
+         * PASSANDO A VARIAVEL $produto PARA A ROTA
+         */
         return redirect()->route('produto.show', ['produto' => $produto->id]);
+    
     }
 
     /**
-     * Remove the specified resource from storage.
+     * MÉTODO RESPONSAVEL POR EXCLUIR UM REGISTRO
      *
      * @param  \App\Produto  $produto
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response ( REDIRECT )
      */
-    public function destroy(Produto $produto)
-    {
+    public function destroy(Produto $produto){
+
+        // DELETANDO O REGISTRO DO BD
         $produto->delete();
 
+        /**
+         *  REDIRECIONANDO PARA ROTA (INDEX)
+         */
         return redirect()->route('produto.index');
+    
     }
 }
