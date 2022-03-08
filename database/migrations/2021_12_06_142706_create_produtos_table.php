@@ -15,6 +15,7 @@ class CreateProdutosTable extends Migration
     {
         Schema::create('produtos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("fornecedor_id");
             $table->string("nome", 100);
             $table->text("descricao")->nullable();
             $table->integer("peso")->nullable();
@@ -22,6 +23,9 @@ class CreateProdutosTable extends Migration
             $table->integer("estoque_minimo")->default(1);
             $table->integer("estoque_maximo")->default(1);
             $table->timestamps();
+
+            // constraint
+            $table->foreign('fornecedor_id')->references('id')->on('fornecedores');
         });
     }
 

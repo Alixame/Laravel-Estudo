@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Fornecedor;
 use App\Produto;
 use App\ProdutoDetalhe;
 use App\Unidade;
@@ -15,6 +16,7 @@ class ProdutoController extends Controller {
         'descricao' => 'required|min:3|max:2000',
         'peso' => 'required|integer',
         'unidade_id' => 'exists:unidades,id', // esse tipo de validação verifica se o dado informado existe na coluna da tabela informada exists:<tabela>,<coluna>
+        'fornecedor_id' => 'exists:fornecedores,id'
     ];
 
     // DEFININDO MENSAGENS PERSONALIZADAS CASO OCORRA ERRO NA VALIDAÇÃO
@@ -25,7 +27,8 @@ class ProdutoController extends Controller {
         'descricao.min' => 'O campo descricao deve conter no minimo 3 caracteres',
         'descricao.min' => 'O campo descricao deve conter no maximo 2000 caracteres',
         'peso.integer' => 'O campo peso deve ser do tipo inteiro',
-        'unidade_id.exists' => 'O campo unidade de medida informado não existe'
+        'unidade_id.exists' => 'O campo unidade de medida informado não existe',
+        'fornecedor_id.exists' => 'O campo fornecedor informado não existe'
     ];
 
     /**
@@ -37,7 +40,7 @@ class ProdutoController extends Controller {
     public function index(Request $request){
 
         // PEGANDO DADOS DO BANCO UTILIZANDO PAGINAÇÃO (SEMELHANTE AO METODO ALL MAS NESTE EXISTE NAVEEGAÇÃO ENTRE PAGINAS JÁ PRONTA)
-        $produtos = Produto::with(['produtoDetalhe'])->paginate(10);
+        $produtos = Produto::with(['produtoDetalhe','fornecedor'])->paginate(10);
 
         /* METODO MANUAL DE BUSCAR RELAÇÃO 1 PRA 1
         foreach ($produtos as $key => $produto) {
@@ -77,12 +80,15 @@ class ProdutoController extends Controller {
         // PEGANDO TODOS OS REGISTROS DE UNIDADES PARA SEREM USADOS NO SELECT DO FORMULARIO
         $unidades = Unidade::all();
 
+        // PEGANDO TODOS OS REGISTROS DE UNIDADES PARA SEREM USADOS NO SELECT DO FORMULARIO
+        $fornecedores = Fornecedor::all();
+
         /**
          *  RETORNANDO VIEW (CREATE)
          * 
          * PASSANDO A VARIAVEL $unidades PARA A VIEW
          */
-        return view('site.admin.produto.create', ['unidades' => $unidades]);
+        return view('site.admin.produto.create', ['unidades' => $unidades, 'fornecedores' => $fornecedores]);
         
         /**
          *  RETORNANDO VIEW (CREATE-EDIT)
@@ -142,12 +148,15 @@ class ProdutoController extends Controller {
         // PEGANDO TODOS OS REGISTROS DE UNIDADES PARA SEREM USADOS NO SELECT DO FORMULARIO 
         $unidades = Unidade::all();
 
+        // PEGANDO TODOS OS REGISTROS DE UNIDADES PARA SEREM USADOS NO SELECT DO FORMULARIO
+        $fornecedores = Fornecedor::all();
+
          /**
          *  RETORNANDO VIEW (EDIT)
          * 
          * PASSANDO AS VARIAVEIS $produto E $unidades PARA A VIEW
          */
-        return view('site.admin.produto.edit', ['produto' => $produto,  'unidades' => $unidades]);
+        return view('site.admin.produto.edit', ['produto' => $produto,  'unidades' => $unidades, 'fornecedores' => $fornecedores]);
 
         /**
          *  RETORNANDO VIEW (CREATE-EDIT)
