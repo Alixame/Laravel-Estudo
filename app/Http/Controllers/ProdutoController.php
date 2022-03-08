@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Produto;
+use App\ProdutoDetalhe;
 use App\Unidade;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,24 @@ class ProdutoController extends Controller {
     public function index(Request $request){
 
         // PEGANDO DADOS DO BANCO UTILIZANDO PAGINAÇÃO (SEMELHANTE AO METODO ALL MAS NESTE EXISTE NAVEEGAÇÃO ENTRE PAGINAS JÁ PRONTA)
-        $produtos = Produto::paginate(10);
+        $produtos = Produto::with(['produtoDetalhe'])->paginate(10);
+
+        /* METODO MANUAL DE BUSCAR RELAÇÃO 1 PRA 1
+        foreach ($produtos as $key => $produto) {
+            //print_r($produto->getAttributes());
+
+            $produtoDetalhe = ProdutoDetalhe::where('produto_id', $produto->id)->first();
+
+            if (isset($produtoDetalhe)) {
+                //print_r($produtoDetalhe->getAttributes());
+
+                $produtos[$key]['comprimento'] = $produtoDetalhe->comprimento;
+                $produtos[$key]['largura'] = $produtoDetalhe->largura;
+                $produtos[$key]['altura'] = $produtoDetalhe->altura;
+
+            }
+       
+        }*/
 
         /**
          *  RETORNANDO VIEW (INDEX)
