@@ -2,18 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Cliente;
+use App\Pedido;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
 {
+
+    protected $regras = [
+        'cliente_id' => 'exists:clientes,id'
+    ];
+
+    protected $feedback = [
+        'cliente_id.exists' => 'O campo informado não existe'
+    ];
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $pedidos = Pedido::paginate(10);
+
+        return view('site.admin.pedido.index', ['pedidos' => $pedidos, 'request' => $request->all()]);
     }
 
     /**
@@ -23,7 +36,9 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        //
+        $clientes = Cliente::all();
+
+        return view('site.admin.pedido.create', ['clientes' => $clientes]);
     }
 
     /**
@@ -34,7 +49,11 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->regras, $this->feedback);
+
+        Pedido::create($request->all());
+
+        return redirect()->route('pedido.index');
     }
 
     /**

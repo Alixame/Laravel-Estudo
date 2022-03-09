@@ -17,4 +17,9 @@ class Produto extends Model
     public function fornecedor() {
         return $this->belongsTo('App\Fornecedor');
     }
+
+    // USANDO BOAS PRATICAS DO LARAVEL PARA PEGAR DADOS RELACIONADOS N PRA N (METODO 'PERTENCE A MUITOS' - OU SEJA PRODUTO 'PERTENCE A MUITOS' PEDIDOS)
+    public function pedidos() {
+        return $this->belongsToMany('App\Pedido', 'pedido_produtos');
+    }
 }

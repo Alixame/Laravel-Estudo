@@ -17,6 +17,7 @@ class CreatePedidoProdutosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('pedido_id');
             $table->unsignedBigInteger('produto_id');
+            $table->integer('quantidade');
             $table->timestamps();
 
             // constraint

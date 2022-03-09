@@ -34,7 +34,7 @@
                         <td>{{ $cliente->nome }}</td>
                         <td>
                             <a href="{{ route('cliente.show',['cliente' => $cliente->id]) }}">Visualizar</a>
-                            <a href="{{ route('cliente.edit',['cliente' => $produto->id]) }}">Editar</a>
+                            <a href="{{ route('cliente.edit',['cliente' => $cliente->id]) }}">Editar</a>
                             <form id="form_{{$cliente->id}}" method="POST" action="{{ route('cliente.destroy',['cliente' => $cliente->id]) }}">
                                 @csrf
                                 @method('DELETE')

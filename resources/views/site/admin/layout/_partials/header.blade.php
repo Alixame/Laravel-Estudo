@@ -9,6 +9,7 @@
             <li><a href="{{ route('admin.painel') }}">Home</a></li>
             <li><a href="{{ route('cliente.index') }}">Cliente</a></li>
             <li><a href="{{ route('admin.fornecedor') }}">Fornecedor</a></li>
+            <li><a href="{{ route('pedido.index') }}">Pedido</a></li>
             <li><a href="{{ route('produto.index') }}">Produto</a></li>
             <li><a href="{{ route('admin.sair') }}">Sair</a></li>
         </ul>

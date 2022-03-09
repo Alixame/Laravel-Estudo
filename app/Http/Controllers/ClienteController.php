@@ -7,6 +7,18 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
+
+    protected $regras = [
+        'nome' => 'required|min:3|max:40'
+    ];
+
+    protected $feedback = [
+        'required' => 'O campo :attribute deve ser preenchido',
+        'nome.min' => 'O campo nome deve ter no minimo 3 caracteristicas',
+        'nome.max' => 'O campo nome deve ter no maximo 3 caracteristicas'
+    ];
+
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +38,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('site.admin.cliente.create');
     }
 
     /**
@@ -37,7 +49,11 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->regras, $this->feedback);
+
+        Cliente::create($request->all());
+
+        return redirect()->route('cliente.index');
     }
 
     /**
